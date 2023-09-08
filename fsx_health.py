@@ -1,5 +1,4 @@
 import os
-import shutil
 import json
 import requests
 
@@ -26,7 +25,7 @@ def TEST_FILE(file_path, file_name):
         print(f"Failed to create the file '{file_name}' on the network share.")
         return f"2"
 
-def O11Y_CREATE_SUCCESS(result_message):
+def O11Y_CREATE_SUCCESS(create_result_message):
     endpoint = 'https://ingest.' + realm + '.signalfx.com/v2/datapoint'
     headers = {
         'Content-Type': 'application/json',
@@ -37,7 +36,7 @@ def O11Y_CREATE_SUCCESS(result_message):
         "gauge": [
             {
                 "metric": "fsx_write_result",
-                "value": result_message
+                "value": create_result_message
             }
         ]
     }
@@ -102,12 +101,15 @@ def O11Y_DELETE_SUCCESS(delete_result_message):
 
 
 CREATE_FILE(file_path)
-result_message=TEST_FILE(file_path, file_name)
 
+# pause to enable testing
 input("Press enter to continue")
 
-O11Y_CREATE_SUCCESS(result_message)
+create_result_message=TEST_FILE(file_path, file_name)
+O11Y_CREATE_SUCCESS(create_result_message)
+
+# pause to enable testing
+input("Press enter to continue")
 
 delete_result_message=DELETE_FILE(file_path, file_name)
-
 O11Y_DELETE_SUCCESS(delete_result_message)
