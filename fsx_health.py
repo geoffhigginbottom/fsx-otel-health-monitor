@@ -2,7 +2,7 @@ import os
 import json
 import requests
 
-access_token = 'dAb_HPT5SSP243Af4lYikg'
+access_token = os.getenv('SPLUNK_ACCESS_TOKEN')
 realm = 'eu0'
 network_share_path = r"\\fs-0b060f4317a02b1fa.rxtest.local\share"
 file_name = "testfile.txt"
