@@ -3,9 +3,10 @@ import json
 import requests
 
 access_token = os.getenv('SPLUNK_ACCESS_TOKEN')
-realm = 'eu0'
-network_share_path = r"\\fs-0b060f4317a02b1fa.rxtest.local\share"
-file_name = "testfile.txt"
+realm = os.getenv('SPLUNK_REALM')
+fsx_share_path = os.getenv('FSX_SHARE_PATH')
+network_share_path = rf"\\{fsx_share_path}"
+file_name = os.getenv('FSX_FILE_NAME')
 file_path = os.path.join(network_share_path, file_name)
 
 def CREATE_FILE(file_path):
@@ -47,9 +48,9 @@ def O11Y_CREATE_SUCCESS(create_result_message):
         
         # Check the response
         if response.status_code == 200:
-            print("Metric sent successfully!")
+            print("Metric 'fsx_write_result' sent successfully!")
         else:
-            print(f"Failed to send metric. Status code: {response.status_code}")
+            print(f"Failed to send metric 'fsx_write_result'. Status code: {response.status_code}")
             print(response.text)
 
     except Exception as e:
@@ -91,9 +92,9 @@ def O11Y_DELETE_SUCCESS(delete_result_message):
         
         # Check the response
         if response.status_code == 200:
-            print("Metric sent successfully!")
+            print("Metric 'fsx_delete_result' sent successfully!")
         else:
-            print(f"Failed to send metric. Status code: {response.status_code}")
+            print(f"Failed to send metric 'fsx_delete_result'. Status code: {response.status_code}")
             print(response.text)
 
     except Exception as e:
