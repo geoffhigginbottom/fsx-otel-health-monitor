@@ -85,7 +85,7 @@ def O11Y_DELETE_SUCCESS(delete_result_message):
     metric_data = {
         "gauge": [
             {
-                "metric": "fsx_write_result",
+                "metric": "fsx_delete_result",
                 "value": create_result_message,
                 "dimensions": {
                     "region": "us-west",
