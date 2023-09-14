@@ -37,7 +37,12 @@ def O11Y_CREATE_SUCCESS(create_result_message):
         "gauge": [
             {
                 "metric": "fsx_write_result",
-                "value": create_result_message
+                "value": create_result_message,
+                "dimensions": {
+                    "region": "us-west",
+                    "environment": "production",
+                    "datacenter": "dc-1"
+                }
             }
         ]
     }
@@ -80,8 +85,13 @@ def O11Y_DELETE_SUCCESS(delete_result_message):
     metric_data = {
         "gauge": [
             {
-                "metric": "fsx_delete_result",
-                "value": delete_result_message
+                "metric": "fsx_write_result",
+                "value": create_result_message,
+                "dimensions": {
+                    "region": "us-west",
+                    "environment": "production",
+                    "datacenter": "dc-1"
+                }
             }
         ]
     }
